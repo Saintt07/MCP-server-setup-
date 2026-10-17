@@ -34,9 +34,69 @@ my-mcp-project/
 ├── README.md             # Project documentation and guide
 └── demo_transcript.md    # Recorded tool-call demo transcript & test run
 
-
+```
+Installation & Setup
 Clone the repository:
 
 Bash
 git clone [https://github.com/Saintt07/MCP-server-setup-.git](https://github.com/Saintt07/MCP-server-setup-.git)
 cd MCP-server-setup-
+Set up your environment variables:
+Copy the example environment file and fill in your credentials:
+
+Bash
+cp .env.example .env
+Install Python dependencies:
+
+Bash
+pip install "m[cli]" fastmcp uvicorn pydantic
+Authenticate ngrok (First-time setup only):
+
+Bash
+ngrok config add-authtoken YOUR_NGROK_AUTH_TOKEN
+Running the Server
+Option A: Manual Run (Recommended for Development & Debugging)
+Start your Python FastMCP server in your first terminal:
+
+Bash
+python server.py
+In a separate terminal, launch your ngrok tunnel pointing to port 8000:
+
+Bash
+ngrok http 8000
+Option B: Background Management (PM2)
+To run your services silently in the background:
+
+Bash
+npx pm2 start ecosystem.config.js
+Connecting to Cline
+Copy your active public ngrok HTTPS URL (e.g., https://xxxx.ngrok-free.app).
+
+Open your Cline MCP settings file (cline_mcp_settings.json) and configure your server endpoint with the required /mcp transport path:
+
+JSON
+{
+  "mcpServers": {
+    "connector": {
+      "url": "[https://YOUR-NGROK-URL.ngrok-free.app/mcp](https://YOUR-NGROK-URL.ngrok-free.app/mcp)"
+    }
+  }
+}
+Reload your VS Code window (Ctrl+Shift+P -> Developer: Reload Window).
+
+The green connected status and your custom Python tools will automatically populate in Cline! You can review demo_transcript.md for a sample execution log of a successful test run.
+
+Support & Help
+If you encounter connection errors or need assistance with tool configuration:
+
+Verify that your Python server terminal is actively running and listening on port 8000.
+
+Confirm your ngrok tunnel is active and your public URL matches your cline_mcp_settings.json file.
+
+Review the demo_transcript.md file for expected output behaviors.
+
+Maintainers & Contributing
+Maintained by Saintt07.
+
+
+
