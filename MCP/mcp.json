@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "connector": {
+      "type": "http",
+      "url": "https://chrome-congress-coconut.ngrok-free.dev/mcp/sse"
+    }
+  }
+}
