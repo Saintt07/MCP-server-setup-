@@ -39,13 +39,15 @@ Installation & Setup
 Clone the repository:
 
 Bash
-git clone [https://github.com/Saintt07/MCP-server-setup-.git](https://github.com/Saintt07/MCP-server-setup-.git)
-cd MCP-server-setup-
+  git clone [https://github.com/Saintt07/MCP-server-setup-.git](https://github.com/Saintt07/MCP-server-setup-.git)
+  cd MCP-server-setup-
+  
 Set up your environment variables:
 Copy the example environment file and fill in your credentials:
 
 Bash
-cp .env.example .env
+  cp .env.example .env
+  
 Install Python dependencies:
 
 Bash
