@@ -37,9 +37,14 @@ my-mcp-project/
 ```
 ## Installation & Setup
 
-Clone the repository:
-git clone [https://github.com/Saintt07/MCP-server-setup-.git](https://github.com/Saintt07/MCP-server-setup-.git)
-cd MCP-server-setup-
+## Installation & Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/Saintt07/MCP-server-setup-.git](https://github.com/Saintt07/MCP-server-setup-.git)
+   cd MCP-server-setup-
+
+  
 
 
 
