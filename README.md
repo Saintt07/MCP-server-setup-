@@ -1,80 +1,129 @@
-🔌 Custom FastMCP Server with Cline & ngrok
+Markdown
+# 🔌 Custom Python FastMCP Server with Cline & ngrok
 
-A lightweight, extensible Model Context Protocol (MCP) server built with Python and FastMCP, exposed to the internet through ngrok, managed by PM2, and integrated with the Cline VS Code extension.
+A lightweight, extensible Model Context Protocol (MCP) server built with Python (`FastMCP`), exposed securely to the internet via `ngrok`, managed by `PM2`, and integrated seamlessly with the `Cline` VS Code extension.
 
-📌 Overview
+---
 
-This project bridges local Python scripts and AI assistants through a custom Model Context Protocol (MCP) server.
+## What the Project Does
 
-Built with Python's FastMCP framework, it allows AI clients such as Cline to interact with custom Python tools over an HTTP transport layer.
+This project acts as a bridge between local Python scripts and AI assistants. It provisions a custom Model Context Protocol (MCP) server using Python's `FastMCP` framework, allowing AI clients like **Cline** to execute local workspace and system tools securely across an HTTP transport layer. 
 
-Whether you're automating file operations, running data queries, or building custom AI agent workflows, this project provides a foundation for extending AI assistants with your own tools.
+Whether you're automating file operations, running data queries, or building custom agent workflows, this architecture provides a standardized interface for AI-driven execution.
 
-✨ Features
-🤖 AI Integration: Extend your Cline AI assistant with custom Python tools directly from VS Code.
-🌐 Secure Remote Tunneling: Expose your local MCP server through an ngrok HTTPS tunnel.
-⚙️ Process Management: Use PM2 to run, monitor, and manage background services.
-🧩 Modular Architecture: Keep server initialization, tool definitions, and configuration organized in separate Python modules.
-🔧 Extensible Tools: Add custom Python functions and expose them to compatible MCP clients.
-🚀 Flexible Execution: Run the server manually during development or manage it with PM2.
-🏗️ Project Structure
-MCP-server-setup-/
-├── .env.example          # Template for environment variables
-├── .gitignore            # Excludes secrets, logs, and cache files
-├── ecosystem.config.js   # PM2 process configuration
-├── server.py             # FastMCP server entry point
-├── tools.py              # Custom MCP tool definitions
+---
+
+## Why the Project Is Useful
+
+* **Seamless AI Integration:** Instantly extends your VS Code AI assistant (`Cline`) with custom, locally-defined Python tools.
+* **Secure Remote Tunneling:** Exposes your local server safely to the web using an `ngrok` tunnel, enabling cross-network AI tool execution.
+* **Reliable Process Management:** Includes a pre-configured `PM2` ecosystem setup (`ecosystem.config.js`) for running and monitoring your background server processes smoothly.
+* **Modular Design:** Clean separation of concerns between core server routing (`server.py`), tool definitions (`tools.py`), and configuration management (`config.py`).
+
+---
+
+## Project Structure
+
+```text
+my-mcp-project/
+├── .env.example          # Template for required environment variables
+├── .gitignore            # Excludes local logs, cache, and secrets
+├── ecosystem.config.js   # PM2 background process configuration
+├── server.py             # Main FastMCP server bootstrap script
+├── tools.py              # Custom registered tools module
 ├── config.py             # Configuration loader
-├── README.md             # Project documentation
-└── demo_transcript.md     # Example tool-call transcript
-
-🛠️ Prerequisites
-
-Before getting started, make sure you have the following installed:
+├── README.md             # Project documentation and guide
+└── demo_transcript.md    # Recorded tool-call demo transcript & test run
+```
+Getting Started
+Prerequisites
+Ensure you have the following installed on your local machine:
 
 Python 3.10 or higher
-Node.js and npm
-PM2 (can be run through npx)
-ngrok with an active account
-Visual Studio Code
-Cline VS Code extension
 
-You will also need an ngrok authentication token to establish your public tunnel.
+Node.js & npm (required for pm2 and ngrok)
 
-🚀 Getting Started
-1. Clone the Repository
-git clone https://github.com/Saintt07/MCP-server-setup-.git
+VS Code with the Cline extension installed
+
+An active ngrok account with your local auth token configured
+
+Installation & Setup
+Clone the repository:
+```
+Bash
+git clone [https://github.com/Saintt07/MCP-server-setup-.git](https://github.com/Saintt07/MCP-server-setup-.git)
 cd MCP-server-setup-
+```
 
-2. Configure Environment Variables
-
-Copy the example environment file:
-
+Set up your environment variables:
+Copy the example environment file and fill in your credentials:
+```
+Bash
 cp .env.example .env
+```
 
-
-Open .env and configure the required environment variables.
-
-Note: Never commit your .env file or expose API keys, authentication tokens, or other sensitive credentials in your repository.
-3. Install Python Dependencies
-
-Install the required Python packages:
-
+Install Python dependencies:
+```
+Bash
 pip install "m[cli]" fastmcp uvicorn pydantic
+```
 
+Authenticate ngrok (First-time setup only):
+```
+Bash
+ngrok config add-authtoken YOUR_NGROK_AUTH_TOKEN
+```
 
-It is recommended to use a virtual environment to keep project dependencies isolated.
+## Running the Server
 
-Create and activate a virtual environment:
+Option A: Manual Run (Recommended for Development & Debugging)
+Start your Python FastMCP server in your first terminal:
+```
+Bash
+python server.py
+```
 
-python -m venv .venv
+In a separate terminal, launch your ngrok tunnel pointing to port 8000:
+```
+Bash
+ngrok http 8000
+```
 
+Option B: Background Management (PM2)
+To run your services silently in the background:
+```
+Bash
+npx pm2 start ecosystem.config.js
+```
 
-Windows:
+Connecting to Cline
+Copy your active public ngrok HTTPS URL (e.g., https://xxxx.ngrok-free.app).
 
-.venv\Scripts\Activate.ps1
+Open your Cline MCP settings file (cline_mcp_settings.json) and configure your server endpoint with the required /mcp transport path:
+```
+JSON
+{
+  "mcpServers": {
+    "connector": {
+      "url": "[https://YOUR-NGROK-URL.ngrok-free.app/mcp](https://YOUR-NGROK-URL.ngrok-free.app/mcp)"
+    }
+  }
+}
+```
+Reload your VS Code window (Ctrl+Shift+P -> Developer: Reload Window).
 
+The green connected status and your custom Python tools will automatically populate in Cline! You can review demo_transcript.md for a sample execution log of a successful test run.
 
-Linux/macOS:
+## Support & Help
+If you encounter connection errors or need assistance with tool configuration:
 
-source .ven
+Verify that your Python server terminal is actively running and listening on port 8000.
+
+Confirm your ngrok tunnel is active and your public URL matches your cline_mcp_settings.json file.
+
+Review the demo_transcript.md file for expected output behaviors.
+
+Maintainers & Contributing
+Maintained by Saintt07.
+
+Contributions, bug reports, and feature requests are welcome! Feel free to open an issue or submit a pull request for improvements.
