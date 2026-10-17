@@ -1,55 +1,80 @@
-# 🔌 Custom Python FastMCP Server with Cline & ngrok
+🔌 Custom FastMCP Server with Cline & ngrok
 
-A lightweight, extensible Model Context Protocol (MCP) server built with Python (`FastMCP`), exposed securely to the internet via `ngrok`, managed by `PM2`, and integrated seamlessly with the `Cline` VS Code extension.
+A lightweight, extensible Model Context Protocol (MCP) server built with Python and FastMCP, exposed to the internet through ngrok, managed by PM2, and integrated with the Cline VS Code extension.
 
----
+📌 Overview
 
-## What the Project Does
+This project bridges local Python scripts and AI assistants through a custom Model Context Protocol (MCP) server.
 
-This project acts as a bridge between local Python scripts and AI assistants. It provisions a custom Model Context Protocol (MCP) server using Python's `FastMCP` framework, allowing AI clients like **Cline** to execute local workspace and system tools securely across an HTTP transport layer. 
+Built with Python's FastMCP framework, it allows AI clients such as Cline to interact with custom Python tools over an HTTP transport layer.
 
-Whether you're automating file operations, running data queries, or building custom agent workflows, this architecture provides a standardized interface for AI-driven execution.
+Whether you're automating file operations, running data queries, or building custom AI agent workflows, this project provides a foundation for extending AI assistants with your own tools.
 
----
-
-## Why the Project Is Useful
-
-* **Seamless AI Integration:** Instantly extends your VS Code AI assistant (`Cline`) with custom, locally-defined Python tools.
-* **Secure Remote Tunneling:** Exposes your local server safely to the web using an `ngrok` tunnel, enabling cross-network AI tool execution.
-* **Reliable Process Management:** Includes a pre-configured `PM2` ecosystem setup (`ecosystem.config.js`) for running and monitoring your background server processes smoothly.
-* **Modular Design:** Clean separation of concerns between core server routing (`server.py`), tool definitions (`tools.py`), and configuration management (`config.py`).
-
----
-
-## Project Structure
-
-```text
-my-mcp-project/
-├── .env.example          # Template for required environment variables
-├── .gitignore            # Excludes local logs, cache, and secrets
-├── ecosystem.config.js   # PM2 background process configuration
-├── server.py             # Main FastMCP server bootstrap script
-├── tools.py              # Custom registered tools module
+✨ Features
+🤖 AI Integration: Extend your Cline AI assistant with custom Python tools directly from VS Code.
+🌐 Secure Remote Tunneling: Expose your local MCP server through an ngrok HTTPS tunnel.
+⚙️ Process Management: Use PM2 to run, monitor, and manage background services.
+🧩 Modular Architecture: Keep server initialization, tool definitions, and configuration organized in separate Python modules.
+🔧 Extensible Tools: Add custom Python functions and expose them to compatible MCP clients.
+🚀 Flexible Execution: Run the server manually during development or manage it with PM2.
+🏗️ Project Structure
+MCP-server-setup-/
+├── .env.example          # Template for environment variables
+├── .gitignore            # Excludes secrets, logs, and cache files
+├── ecosystem.config.js   # PM2 process configuration
+├── server.py             # FastMCP server entry point
+├── tools.py              # Custom MCP tool definitions
 ├── config.py             # Configuration loader
-├── README.md             # Project documentation and guide
-└── demo_transcript.md    # Recorded tool-call demo transcript & test run
+├── README.md             # Project documentation
+└── demo_transcript.md     # Example tool-call transcript
 
-```
-## Installation & Setup
+🛠️ Prerequisites
 
-## Installation & Setup
+Before getting started, make sure you have the following installed:
 
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/Saintt07/MCP-server-setup-.git](https://github.com/Saintt07/MCP-server-setup-.git)
-   cd MCP-server-setup-
+Python 3.10 or higher
+Node.js and npm
+PM2 (can be run through npx)
+ngrok with an active account
+Visual Studio Code
+Cline VS Code extension
 
-  
+You will also need an ngrok authentication token to establish your public tunnel.
+
+🚀 Getting Started
+1. Clone the Repository
+git clone https://github.com/Saintt07/MCP-server-setup-.git
+cd MCP-server-setup-
+
+2. Configure Environment Variables
+
+Copy the example environment file:
+
+cp .env.example .env
 
 
+Open .env and configure the required environment variables.
 
-Maintainers & Contributing
-Maintained by Saintt07.
+Note: Never commit your .env file or expose API keys, authentication tokens, or other sensitive credentials in your repository.
+3. Install Python Dependencies
+
+Install the required Python packages:
+
+pip install "m[cli]" fastmcp uvicorn pydantic
 
 
+It is recommended to use a virtual environment to keep project dependencies isolated.
 
+Create and activate a virtual environment:
+
+python -m venv .venv
+
+
+Windows:
+
+.venv\Scripts\Activate.ps1
+
+
+Linux/macOS:
+
+source .ven
